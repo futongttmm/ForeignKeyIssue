@@ -1,0 +1,14 @@
+﻿@model WebApplication1.Models.Customer
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul>
+    <li>@Model.Name</li>
+    @if(Model.Birthday != null)
+    {
+        <li>@Model.Birthday</li>
+    }
+</ul>
+

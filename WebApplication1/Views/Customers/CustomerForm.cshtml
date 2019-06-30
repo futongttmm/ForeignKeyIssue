@@ -1,0 +1,40 @@
+﻿@model WebApplication1.ViewModels.CustomerMembershipViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SaveAndUpdate", "Customers"))
+{
+    <div class="form-grounp">
+        @Html.LabelFor(m => m.Customer.Name);
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Name)
+    </div>
+    <div class="form-grounp">
+        @Html.LabelFor(m => m.Customer.Birthday);
+        @Html.TextBoxFor(m => m.Customer.Birthday, "{0:d MMM yyyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-grounp">
+        @Html.LabelFor(m => m.Customer.Membership);
+        @Html.DropDownListFor(m => m.Customer.Membership,
+                        new SelectList(Model.MembershipTypes, "Id", "Name"),
+                        "Select Membership",
+                        new { @class = "form-control" })
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribeToNewsletter) Subscribed to Newsletter?
+        </label>
+    </div>
+
+    <!--
+        It creates a hidden input on the form for the field (from your model) that you pass it.
+        It is useful for fields in your Model/ViewModel that you need to persist on the page 
+        and have passed back when another call is made but shouldn't be seen by the user.
+    -->
+    @Html.HiddenFor(c => c.Customer.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+    
+}
+

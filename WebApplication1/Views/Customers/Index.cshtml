@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplication1.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Customers</h1>
+
+<button type="button" class="btn btn-primary">
+    @Html.ActionLink("NEW CUSTOMER", "Add", "Customers", null, new { @class = "btn btn-primary" })
+</button>
+
+@if (!Model.Any())
+{
+    <p>No Customer yet.</p>
+}
+else
+{
+    <table class="table	table-­‐bordered	table-­‐hover">
+        <thead>
+            <tr>
+                <th><b>Customers</b></th>
+                <th><b>MembershipType</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(m.Name, "Edit", "Customers", new { id = m.Id, @class = "customer" }, null)</td>
+                    <!--the last parameter is really improtant, and without it, id cannot be passed to corresponding controller-->
+                    <td>@m.Membership.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+

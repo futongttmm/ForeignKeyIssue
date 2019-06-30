@@ -1,0 +1,29 @@
+﻿@model WebApplication1.ViewModels.CustomerListViewModels
+
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var className = String.Empty;
+    if (Model.Customers.Count() > 5)
+    {
+        className = "popular";
+    }
+}
+
+
+
+@if (Model.Customers.Count() == 0)
+{
+    <p class=className>No customer rent this movie.</p>
+}
+else
+{
+    foreach (var c in Model.Customers)
+    {
+        <p>@c.Name</p>
+    }
+}
+
